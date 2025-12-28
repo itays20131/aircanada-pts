@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Air Canada PTS Application</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 500px;
+    background: white;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+h1 {
+    text-align: center;
+    color: #e60012;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 12px;
+    background: #e60012;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #c4000f;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Air Canada PTS</h1>
+
+    <form id="applicationForm">
+        <label>Roblox Username</label>
+        <input type="text" id="roblox" required>
+
+        <label>Discord Username</label>
+        <input type="text" id="discord" required>
+
+        <label>Role Applying For</label>
+        <select id="role" required>
+            <option value="">Select a role</option>
+            <option>Economy Passenger</option>
+            <option>Business Passenger</option>
+            <option>Pilot</option>
+            <option>ATC</option>
+        </select>
+
+        <button type="submit">Submit Application</button>
+    </form>
+</div>
+
+<script>
+const webhookURL = "https://discord.com/api/webhooks/1454557014972694621/lgWx_Rd1dRa6v2lkkOZsPt7vkrOsXwoO548Y9WhE_yHxH-XIyoiMCKGmEKroX8m6l_Ng";
+
+document.getElementById("applicationForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const roblox = document.getElementById("roblox").value;
+    const discord = document.getElementById("discord").value;
+    const role = document.getElementById("role").value;
+
+    fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            embeds: [{
+                title: "✈️ New Air Canada PTS Application",
+                color: 15158332,
+                fields: [
+                    { name: "Roblox Username", value: roblox, inline: false },
+                    { name: "Discord Username", value: discord, inline: false },
+                    { name: "Role", value: role, inline: false }
+                ]
+            }]
+        })
+    }).then(() => {
+        window.location.href = "thankyou.html";
+    });
+});
+</script>
+
+</body>
+</html>
